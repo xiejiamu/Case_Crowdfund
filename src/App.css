@@ -36,3 +36,45 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar {
+  display: flex;
+  .el-menu-demo {
+    display: flex;
+    width: 100%; /* 确保菜单填充整个容器 */
+  }
+}
+
+.scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 20px;
+  width: 100%;
+}
+
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+}
+
+.label {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.value {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.divider {
+  height: 50px; /* Adjust as per your design */
+  border-left: 1px solid #555; /* Lighter/Darker line color as per your design */
+  margin: 0 20px; /* Spacing between scores */
+}
+
