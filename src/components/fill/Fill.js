@@ -1,14 +1,16 @@
 import React, {useState} from 'react'
-import { Breadcrumb, Steps, Select, Dropdown, Input, Button } from 'element-react';
+import { Breadcrumb, Steps, Select, Dropdown, Input, Button, Upload } from 'element-react';
 
 const Fill = () => {    
-    // 使用useState管理状态
-    const [value, setValue] = useState('');
-    const options = [
-      { value: '选项1', label: '文本填写' },
-      { value: '选项2', label: '文件上传' },
-    ];
+  // 使用useState管理状态
+  const [value, setValue] = useState('');
+  const options = [
+    { value: '选项1', label: '文本填写' },
+    { value: '选项2', label: '文件上传' },
+  ];
   
+  
+
   return (
     <div style={{padding: "1rem"}}>
       <div style={{}}>
@@ -21,7 +23,6 @@ const Fill = () => {
         <Steps space={200} active={1} style={{display: 'flex', justifyContent: 'center'}}>
           <Steps.Step title="步骤 1"></Steps.Step>
           <Steps.Step title="步骤 2"></Steps.Step>
-          <Steps.Step title="步骤 3"></Steps.Step>
         </Steps>
 
         <p style={{color: 'white', display: 'flex', justifyContent: 'center'}}>将案例的简略内容进行填写；第二步，审查系统自动匹配的相关案例要素是否正确；第三步，提交通过审核后获取1个月的免费使用时长。</p>
@@ -42,11 +43,26 @@ const Fill = () => {
         <div style={{display: 'flex', justifyContent: 'center'}}>
           <span style={{color: 'white'}}>案例内容</span>
           <div style={{width: '5px'}}></div>
-          <Input style={{width: '50%', height: '80%'}} type="textarea" autosize={{ minRows: 2, maxRows: 100}} placeholder="请输入内容" />
+          <div>value=='选项1'?<Upload
+            className="upload-demo"
+            drag
+            value ={content}
+            multiple
+            tip={<div className="el-upload__tip">支持扩展名：doc .docx .pdf</div>}
+          >
+            <i className="el-icon-upload"></i>
+            <div className="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          </Upload>:<textarea
+                name="content"
+                cols="30"
+                rows="5"
+                value={content}
+                onChange={onChange} placeholder="请输入内容" />
+          </div>
         </div>
 
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '2rem'}}>
-          <Button type="primary" >主要按钮</Button>
+          <Button type="primary" onClick={sendCase(content)}><Link to="/form">下一步</Link></Button>
         </div>
       </div>
 

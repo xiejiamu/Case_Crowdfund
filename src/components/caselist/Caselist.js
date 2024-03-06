@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import { Breadcrumb, Pagination, Table, Input, Button } from 'element-react';
+import { Link } from 'react-router-dom';
+import { Breadcrumb, Pagination, Table, Input, Button, Steps } from 'element-react';
+import { getCaseList } from '../../actions/case';
 
-const Caselist = () => {
-    const data = [
-        { id: 8, title: 'Some title 8', description:'', owner: '张云龙', date: '2023-06-16 14:03', status: 'completed' },
-        { id: 7, title: 'Some title 7', description:'', owner: 'Owner', date: '2023-06-16 14:03', status: 'completed' },
-      ];
+const Caselist = ({getCaseList}) => {
+
+    const data = getCaseList(1, 5, null);
     
     return (
         <div style={{padding: "1rem"}}>
@@ -23,17 +23,17 @@ const Caselist = () => {
                     <div className="scoreboard">
                         <div className="score">
                             <span className="label">全部众筹</span>
-                            <span className="value">8</span>
+                            <span className="value">data.allcase</span>
                         </div>
                         <div className="divider"></div>
                         <div className="score">
                             <span className="label">审批中</span>
-                            <span className="value">0</span>
+                            <span className="value">data.onprogress</span>
                         </div>
                         <div className="divider"></div>
                         <div className="score">
                             <span className="label">已通过</span>
-                            <span className="value">8</span>
+                            <span className="value">data.passed</span>
                         </div>
                     </div>
                 </div>
@@ -46,21 +46,21 @@ const Caselist = () => {
                         style={{width: '7rem', marginLeft: 'auto', display: 'flex'}}
                         icon="search"
                         placeholder="请输入案例名称"
-                        // onIconClick={this.handleIconClick.bind(this)}
+                        onIconClick={this.handleIconClick.bind(this)}
                     />
                 </div>
 
                 <div style={{display: 'flex', justifyContent: 'center', padding: '1rem'}}>
-                    <Button icon="plus" style={{color: 'black'}}>新增案例</Button>
+                    <Button icon="plus" style={{color: 'black'}}><Link to="/fill"></Link>新增案例</Button>
                 </div>
 
                 <div>
-                    {data.map((item) => (
+                    {data.list.map((item) => (
                         <div key={item.id} className="list-item" style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'white', marginLeft: '1rem', marginRight: '1rem'}}>
-                            <div className="title">{item.title}</div>
-                            <div className="owner">{item.owner}</div>
-                            <div className="date">{item.date}</div>
-                            <div className="status">{item.status === 'completed' ? '✅' : '⏳'}</div>
+                            <div className="caseid">{item.id}</div>
+                            <div className="casename">{item.casename}</div>
+                            <div className="caseusername">{item.username}</div>
+                            <div className="casecreated">{item.created}</div>
                         </div>
                     ))}
                 </div>
